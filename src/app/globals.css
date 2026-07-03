@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+:root {
+  /* ---- Soft Minimal palette ---- */
+  --color-paper: #faf6f1;       /* warm cream background */
+  --color-ink: #3a352e;          /* charcoal text */
+  --color-clay: #c97a56;         /* terracotta accent */
+  --color-clay-dark: #b3633f;
+  --color-sand: #e8dfd3;         /* soft sand borders/cards */
+  --color-sand-light: #f1ebe2;
+  --color-taupe: #8b8478;        /* muted secondary text */
+  --color-canvas: #ffffff;       /* pure white for poster art */
+  --color-success: #5f7a5f;
+  --color-error: #b3543f;
+
+  --background: var(--color-paper);
+  --foreground: var(--color-ink);
+}
+
+@theme inline {
+  --color-paper: var(--color-paper);
+  --color-ink: var(--color-ink);
+  --color-clay: var(--color-clay);
+  --color-clay-dark: var(--color-clay-dark);
+  --color-sand: var(--color-sand);
+  --color-sand-light: var(--color-sand-light);
+  --color-taupe: var(--color-taupe);
+  --color-canvas: var(--color-canvas);
+  --color-success: var(--color-success);
+  --color-error: var(--color-error);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-in: fade-in 0.4s ease-out both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+* {
+  border-color: var(--color-sand);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* Visible keyboard focus everywhere — accessibility floor */
+:focus-visible {
+  outline: 2px solid var(--color-clay);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Gallery-label corner ticks — the page's signature hover detail */
+.frame-corners {
+  position: relative;
+}
+.frame-corners::before,
+.frame-corners::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+.frame-corners::before {
+  top: 8px;
+  left: 8px;
+  border-top: 1.5px solid var(--color-clay);
+  border-left: 1.5px solid var(--color-clay);
+  transform: translate(4px, 4px);
+}
+.frame-corners::after {
+  top: 8px;
+  right: 8px;
+  border-top: 1.5px solid var(--color-clay);
+  border-right: 1.5px solid var(--color-clay);
+  transform: translate(-4px, 4px);
+}
+.frame-corners:hover::before,
+.frame-corners:hover::after {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
